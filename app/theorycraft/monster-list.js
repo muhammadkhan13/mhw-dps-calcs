@@ -4,18 +4,16 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Monster } from "./monster.js";
 
-export function MonsterList() {
+export function MonsterList({ onMonsterSelect }) {
     const [monsters, setMonsters] = useState([]);
     const [monsterNames, setMonsterNames] = useState([]);
     const [error, setError] = useState(null);
     const [selectedMonsterName, setSelectedMonsterName] = useState('');
     const [selectedMonster, setSelectedMonster] = useState(null);
-    console.log("starting fetch process");
 
     useEffect(() => {
         async function fetchMonsterData() {
             try {
-                console.log("starting fetch db");
                 const response = await fetch("https://mhw-db.com/monsters");
                 if (!response.ok) {
                     throw new Error("Failed to fetch monster data");
@@ -30,7 +28,6 @@ export function MonsterList() {
 
         fetchMonsterData();
     }, []);
-    console.log("Async passed");
 
     if (error) {return (<div>Error: {error}</div>);}
 
@@ -38,22 +35,24 @@ export function MonsterList() {
         if (selectedMonsterName) {
             const monster = monsters.find(m => m.name === selectedMonsterName);
             setSelectedMonster(monster);
-        }
+            onMonsterSelect(monster);
+                }
     }, [selectedMonsterName, monsters]);
 
     const handleSelectChange = (event) => {
         setSelectedMonsterName(event.target.value);
     };
     
-    return(<div>
+    return(<div className='mt-4 p-2'>
         <h3>Select a Monster</h3>
 
-        <label htmlFor="name-list">Choose:</label>
+        <label htmlFor="name-list">Choose: </label>
         <select 
         id="name-list"
+        className='text-black'
         onChange={handleSelectChange} value={selectedMonsterName}>
             <option value="">...</option>
-            {monsterNames.map((name, index) => (
+            {(monsterNames.sort()).map((name, index) => (
                     <option key={index} value={name}>{name}</option>
                 ))}
         </select>
@@ -61,7 +60,7 @@ export function MonsterList() {
                 <div>
                     <Monster 
                     name={selectedMonster.name} 
-                    type={selectedMonster.species} 
+                    type={selectedMonster.species}
                     description={selectedMonster.description} 
                     resistances={selectedMonster.resistances}
                     weaknesses={selectedMonster.weaknesses}/>

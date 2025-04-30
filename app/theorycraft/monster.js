@@ -14,7 +14,7 @@ export function Monster({ name, type, description, resistances =[], weaknesses =
                         </li>
                     ))
                 ) : (
-                    <li>No resistances found.</li>
+                    <li>No Resistances Found.</li>
                 )}
             </ul>
             <ul>

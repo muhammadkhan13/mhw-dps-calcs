@@ -10,7 +10,7 @@ export async function GET(request) {
 
         const weaponData = [...weapons];
 
-        return new Response(JSON.stringify(weaponData), {status: 200, headers: {"Content-Type": "application/json"},});
+        return new Response(JSON.stringify(weaponData), {status: 200, headers: {"Content-Type": "application/json"}});
     } catch (error) {
         return new Response(JSON.stringify({ error: error.message }), {status: 500, headers: {"Content-Type": "application/json"},});
     }

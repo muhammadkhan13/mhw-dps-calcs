@@ -2,20 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Don't force default white text or black background here */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply font-serif;
 }
+
+/* Optional: Reusable background class if you want */
+.bg-blur {
+  @apply absolute inset-0 bg-cover bg-center blur-sm opacity-40 -z-10;
+  background-image: url('/images/mhw.jpg'); /* Path must be from public/ */
+}
+
+/* Optional: Adding Tailwind Typography utility to handle text style */
+.prose {
+  @apply text-[#fdf5e6]; /* Light text color for paragraphs and headings */
+}
+
+h1, h2, h3, h4, h5, h6, p, li, a, span, label {
+  font-weight: 700;
+  color: #161515; /* Darker text color */
+}
+
+/* Optionally: Define darker border color globally */
+.border-dark {
+  border-color: #3d3d3d; /* Dark border color */
+}
+
+/* Custom class to handle overlay (optional) */
+.bg-overlay {
+  @apply absolute inset-0 bg-black/50; /* Add black semi-transparent overlay */
+}
+
+

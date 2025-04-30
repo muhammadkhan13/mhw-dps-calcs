@@ -13,7 +13,7 @@ export async function GET(request) {
 
         const monsterData = [...monsters];
 
-        return new Response(JSON.stringify(monsterData), {status: 200, headers: {"Content-Type": "application/json"},});
+        return new Response(JSON.stringify(monsterData), {status: 200, headers: {"Content-Type": "application/json"}});
     } catch (error) {
         console.log("DATA FETCH ERROR:" + error.message);
         return new Response(JSON.stringify({ error: error.message }), {status: 500, headers: {"Content-Type": "application/json"},});
