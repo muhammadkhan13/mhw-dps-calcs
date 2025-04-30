@@ -9,6 +9,6 @@ export default function Page() {
   return(
     <div>
       <p>Initial Home Page</p>
-    </div>
+     </div>
   );
 }
